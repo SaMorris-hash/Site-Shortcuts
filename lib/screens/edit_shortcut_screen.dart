@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/site_shortcut.dart';
+import '../utils/site_url.dart';
 
 class EditShortcutScreen extends StatefulWidget {
   final SiteShortcut? existing;
@@ -86,9 +87,17 @@ class _EditShortcutScreenState extends State<EditShortcutScreen> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                 ),
-                validator: (value) => (value == null || value.trim().isEmpty)
-                    ? 'Please enter a website address'
-                    : null,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter a website address';
+                  }
+
+                  if (parseSiteUrl(value) == null) {
+                    return 'Enter a valid website address, such as example.com';
+                  }
+
+                  return null;
+                },
               ),
               const SizedBox(height: 36),
               SizedBox(

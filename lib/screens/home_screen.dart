@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/site_shortcut.dart';
 import '../services/storage_service.dart';
 import 'edit_shortcut_screen.dart';
+import '../utils/site_url.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,19 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openSite(SiteShortcut shortcut) async {
-    var urlString = shortcut.url.trim();
-    if (!urlString.startsWith('http://') &&
-        !urlString.startsWith('https://')) {
-      urlString = 'https://$urlString';
-    }
-    final uri = Uri.tryParse(urlString);
+    final uri = parseSiteUrl(shortcut.url);
+
     if (uri == null) {
       _showMessage('That web address doesn\'t look valid.');
       return;
     }
-    final launched =
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-    if (!launched && mounted) {
+
+    try {
+      final launched =
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+
+      if (!launched) {
+        _showMessage('Could not open a browser for this site.');
+      }
+    } catch (_) {
       _showMessage('Could not open a browser for this site.');
     }
   }
@@ -68,8 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _editShortcut(SiteShortcut shortcut) async {
     final result = await Navigator.of(context).push<SiteShortcut>(
-      MaterialPageRoute(
-          builder: (_) => EditShortcutScreen(existing: shortcut)),
+      MaterialPageRoute(builder: (_) => EditShortcutScreen(existing: shortcut)),
     );
     if (result != null) {
       setState(() {
