@@ -1,91 +1,51 @@
 # Site Shortcuts
 
-A simple, highly accessible Flutter app for saving website shortcuts as large
-buttons and opening them in your default browser.
+Site Shortcuts is a simple Flutter app for saving frequently visited websites as large, easy-to-tap buttons. Tapping a button opens the site in the device’s default browser.
 
-## What's in this folder
+## Why?
 
-This is just the `lib/` source code and `pubspec.yaml` — not a full Flutter
-project (no `android/`, `ios/` folders etc). You'll generate those with the
-`flutter create` command below, then drop this code in.
+A family member got a new Android phone, but on that device they couldn’t add website shortcuts from the browser to their home screen as they had done before. They relied on those shortcuts to get to sites they use regularly.
 
-## Setup (on your Linux Mint machine)
+Site Shortcuts was built to give them a familiar, straightforward way to reach those websites: open one app, find the site, and tap its button.
 
-1. Create a new empty Flutter project and copy these files in:
+## Features
 
-```bash
-cd ~/projects/Flutter
-flutter create site_shortcuts
-```
+- Add a website using a name and URL.
+- See saved websites in a grid of large buttons.
+- Tap a button to open its website in the default browser.
+- Edit or remove shortcuts in a separate edit mode, with confirmation before removal.
+- Keep saved shortcuts on the device between app launches.
+- Use larger text and touch targets, with screen-reader labels on shortcut buttons.
 
-2. Delete the generated placeholder files and copy this project's files over:
+## Built with
 
-```bash
-rm -rf ~/projects/Flutter/site_shortcuts/lib
-cp -r /path/to/downloaded/site_shortcuts/lib ~/projects/Flutter/site_shortcuts/
-cp /path/to/downloaded/site_shortcuts/pubspec.yaml ~/projects/Flutter/site_shortcuts/
-```
+- **Flutter and Dart** for the app
+- **shared_preferences** to save shortcuts locally
+- **url_launcher** to open websites in the browser
 
-(Replace `/path/to/downloaded/site_shortcuts` with wherever you extracted the
-zip I gave you.)
+The app does not require an account or a server.
 
-3. **Important — Android 11+ browser fix.** Open
-   `android/app/src/main/AndroidManifest.xml` and add this `<queries>` block
-   as a direct child of `<manifest>` (a sibling of `<application>`, not
-   inside it). Without this, `url_launcher` can silently fail to find a
-   browser on newer Android versions:
+## Run the project
 
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="https" />
-        </intent>
-    </queries>
-
-    <application ...>
-        ...
-    </application>
-</manifest>
-```
-
-4. Fetch dependencies:
+You’ll need the [Flutter SDK](https://docs.flutter.dev/get-started/install) and a configured device or emulator.
 
 ```bash
-cd ~/projects/Flutter/site_shortcuts
+git clone https://github.com/SaMorris-hash/Site-Shortcuts.git
+cd Site-Shortcuts
 flutter pub get
+flutter run
 ```
 
-## Building the APK
+To build an Android APK:
 
 ```bash
 flutter build apk --release
 ```
 
-The APK will be produced at:
+The APK will be created at `build/app/outputs/flutter-apk/app-release.apk`.
 
-```
-build/app/outputs/flutter-apk/app-release.apk
-```
+## How to use it
 
-Transfer that file to your Nokia C2 (USB cable, email to yourself, cloud
-drive, etc.), then tap it on the phone to install. You'll likely need to
-allow "install unknown apps" for whichever app you use to open the file
-(Settings → Apps → Special access → Install unknown apps).
-
-## Accessibility notes
-
-- Shortcuts are shown as large, high-contrast tappable tiles (not a small
-  list), each at least 2x2 finger-width.
-- Text sizes are all large by default, and the app does **not** override the
-  phone's own font-size / display-size accessibility setting — so if you
-  bump up "Large text" in Android's accessibility settings, this app's text
-  scales up too.
-- Every tile has a screen-reader label ("Open X in browser") for TalkBack
-  users.
-- Tap the pencil icon (top right) to enter Edit mode, which reveals a red
-  remove button on each tile and switches tapping a tile to editing its
-  name/address instead of opening it — so accidental deletes/edits can't
-  happen while browsing normally.
+1. Tap **Add site** and enter a name and website address.
+2. Tap the site’s button whenever you want to open it in your browser.
+3. Tap the pencil icon to edit or remove saved sites. Tap the check icon to leave edit mode.
