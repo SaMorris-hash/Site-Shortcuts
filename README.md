@@ -4,9 +4,7 @@ Site Shortcuts is a simple Flutter app for saving frequently visited websites as
 
 ## Why?
 
-A family member got a new Android phone, but on that device they couldn’t add website shortcuts from the browser to their home screen as they had done before. They relied on those shortcuts to get to sites they use regularly.
-
-Site Shortcuts was built to give them a familiar, straightforward way to reach those websites: open one app, find the site, and tap its button.
+Site Shortcuts was built to give a familiar, straightforward way to bookmark websites: open one app, find the site, and tap its button.
 
 ## Features
 
@@ -49,3 +47,5 @@ The APK will be created at `build/app/outputs/flutter-apk/app-release.apk`.
 1. Tap **Add site** and enter a name and website address.
 2. Tap the site’s button whenever you want to open it in your browser.
 3. Tap the pencil icon to edit or remove saved sites. Tap the check icon to leave edit mode.
+
+![Form for adding a website shortcut](docs/images/Demo.gif)
