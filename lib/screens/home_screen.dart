@@ -26,6 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _load() async {
     final list = await _storage.loadShortcuts();
+
+    if (!mounted) return;
+
     setState(() {
       _shortcuts = list;
       _loading = false;
@@ -63,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final result = await Navigator.of(context).push<SiteShortcut>(
       MaterialPageRoute(builder: (_) => const EditShortcutScreen()),
     );
-    if (result != null) {
+    if (result != null && mounted) {
       setState(() => _shortcuts.add(result));
       await _storage.saveShortcuts(_shortcuts);
     }
@@ -73,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final result = await Navigator.of(context).push<SiteShortcut>(
       MaterialPageRoute(builder: (_) => EditShortcutScreen(existing: shortcut)),
     );
-    if (result != null) {
+    if (result != null && mounted) {
       setState(() {
         final index = _shortcuts.indexWhere((s) => s.id == shortcut.id);
         if (index != -1) _shortcuts[index] = result;
