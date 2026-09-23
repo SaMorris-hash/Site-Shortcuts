@@ -10,7 +10,7 @@ Site Shortcuts was built to give a familiar, straightforward way to bookmark web
 
 A family member relied on website shortcuts on their old phone. After moving to a Nokia C02, we couldn't get the browser to add those shortcuts to its home screen. Finding regular websites through the newer phone interface was difficult for them.
 
-I built Site Shortcuts to give them one simple place to save and open the websites he uses most: open the app, find a large button, and tap it. It started as a small solution to a real problem for someone I know.
+I built Site Shortcuts to give them one simple place to save and open the websites they use most: open the app, find a large button, and tap it. It started as a small solution to a real problem for someone I know.
 
 ## Features
 

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.site_shortcuts"
+    namespace = "com.samorrishash.siteshortcuts"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

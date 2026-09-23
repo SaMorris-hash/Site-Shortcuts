@@ -1,4 +1,4 @@
-package com.example.site_shortcuts
+package com.samorrishash.siteshortcuts
 
 import io.flutter.embedding.android.FlutterActivity
 
